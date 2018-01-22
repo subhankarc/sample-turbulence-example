@@ -1,0 +1,17 @@
+{
+    "Tasks": [{
+        "Type": "Firewall"
+    }],
+
+    "Selector": {
+        "Deployment": {
+            "Name": "etcd-no-ssl"
+        },
+        "Group": {
+            "Name": "etcd"
+        },
+        "ID": {
+            "Limit": "30%"
+        }
+    }
+}

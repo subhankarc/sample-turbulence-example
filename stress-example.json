@@ -1,0 +1,20 @@
+{
+    "Tasks": [{
+        "Type": "Stress",
+        "Timeout": "10m",
+
+        "NumCPUWorkers": 1
+    }],
+
+    "Selector": {
+        "Deployment": {
+            "Name": "etcd-no-ssl"
+        },
+        "Group": {
+            "Name": "etcd"
+        },
+        "ID": {
+            "Limit": "30%"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+---
+instance_groups:
+- azs:
+  - z1
+  instances: 3
+  jobs:
+  - consumes:
+      etcd:
+        from: etcd_server
+    name: etcd
+    properties:
+      etcd:
+        heartbeat_interval_in_milliseconds: 50
+        peer_require_ssl: false
+        require_ssl: false
+    provides:
+      etcd:
+        as: etcd_server
+    release: kubo-etcd
+  - consumes:
+      api:
+        deployment: turbulence
+        from: api
+    name: turbulence_agent
+    release: turbulence
+  name: etcd
+  networks:
+  - name: cf1
+  persistent_disk_type: disk_2G
+  stemcell: default
+  update:
+    max_in_flight: 1
+    serial: true
+  vm_type: vm_2cpu_4gb
+name: etcd-no-ssl
+releases:
+- name: kubo-etcd
+  version: '6'
+- name: turbulence
+  version: 0.10.0
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: '3468.5'
+update:
+  canaries: 0
+  canary_watch_time: 1000-60000
+  max_in_flight: 1
+  update_watch_time: 1000-60000
